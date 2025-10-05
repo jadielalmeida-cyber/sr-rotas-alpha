@@ -1,7 +1,6 @@
 streamlit
 pandas
 pillow
-opencv-python
 pytesseract
 plotly
 folium
