@@ -1,10 +1,8 @@
 import streamlit as st
 import pandas as pd
 import os
-import glob
-from PIL import Image
+from PIL import Image, ImageOps
 import pytesseract
-import cv2
 import re
 import plotly.express as px
 import folium
@@ -35,10 +33,9 @@ def limpar_texto(texto):
     return texto.replace("R$", "").replace(",", ".").strip()
 
 def extrair_corridas_de_historico(caminho_imagem):
-    imagem = cv2.imread(caminho_imagem)
-    cinza = cv2.cvtColor(imagem, cv2.COLOR_BGR2GRAY)
-    _, binaria = cv2.threshold(cinza, 180, 255, cv2.THRESH_BINARY)
-    texto = pytesseract.image_to_string(binaria, lang="por")
+    imagem = Image.open(caminho_imagem).convert("L")
+    imagem = ImageOps.invert(imagem)
+    texto = pytesseract.image_to_string(imagem, lang="por")
     linhas = texto.split("\n")
     corridas = []
 
