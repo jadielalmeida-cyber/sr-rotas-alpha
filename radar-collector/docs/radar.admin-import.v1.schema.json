@@ -1,0 +1,314 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Sr. Rotas — Importação administrativa do Radar",
+  "description": "Valida o arquivo de entrada da prévia. A aptidão de cada item para ingestão é verificada separadamente.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "batch_id",
+    "events",
+    "pois"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "radar.admin-import.v1"
+    },
+    "batch_id": {
+      "type": "string",
+      "format": "uuid",
+      "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+    },
+    "events": {
+      "type": "array",
+      "maxItems": 500,
+      "items": {
+        "$ref": "#/$defs/event"
+      }
+    },
+    "pois": {
+      "type": "array",
+      "maxItems": 500,
+      "items": {
+        "$ref": "#/$defs/poi"
+      }
+    }
+  },
+  "anyOf": [
+    {
+      "properties": {
+        "events": {
+          "minItems": 1
+        }
+      }
+    },
+    {
+      "properties": {
+        "pois": {
+          "minItems": 1
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "origin_ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source",
+        "external_id"
+      ],
+      "properties": {
+        "source": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9_-]{1,79}$"
+        },
+        "external_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 160,
+          "pattern": "\\S"
+        }
+      }
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind"
+      ],
+      "properties": {
+        "kind": {
+          "enum": [
+            "web",
+            "video",
+            "note"
+          ]
+        },
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "maxLength": 1200,
+          "pattern": "^https?://"
+        },
+        "timestamp_sec": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "note": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 500,
+          "pattern": "\\S"
+        },
+        "observed_at": {
+          "$ref": "#/$defs/date_time"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "enum": [
+                  "web",
+                  "video"
+                ]
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "url"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "note"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "note",
+              "observed_at"
+            ]
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "timestamp_sec"
+            ]
+          },
+          "then": {
+            "properties": {
+              "kind": {
+                "const": "video"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "date_time": {
+      "type": "string",
+      "format": "date-time",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,3})?(Z|[+-]\\d{2}:\\d{2})$"
+    },
+    "event": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "client_ref",
+        "name",
+        "evidence"
+      ],
+      "properties": {
+        "client_ref": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,79}$"
+        },
+        "address": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 500,
+          "pattern": "\\S"
+        },
+        "city": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 120,
+          "pattern": "\\S"
+        },
+        "state": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80,
+          "pattern": "\\S"
+        },
+        "lat": {
+          "type": "number",
+          "minimum": -90,
+          "maximum": 90
+        },
+        "lng": {
+          "type": "number",
+          "minimum": -180,
+          "maximum": 180
+        },
+        "origin_ref": {
+          "$ref": "#/$defs/origin_ref"
+        },
+        "evidence": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 10,
+          "items": {
+            "$ref": "#/$defs/evidence"
+          }
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 240,
+          "pattern": "\\S"
+        },
+        "event_type": {
+          "enum": [
+            "event",
+            "music",
+            "sports",
+            "theatre",
+            "fair_convention",
+            "family",
+            "airport",
+            "bus_terminal",
+            "mall",
+            "cultural",
+            "mobility_hub"
+          ]
+        },
+        "venue_name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 240,
+          "pattern": "\\S"
+        },
+        "starts_at": {
+          "$ref": "#/$defs/date_time"
+        },
+        "expected_end_at": {
+          "$ref": "#/$defs/date_time"
+        }
+      }
+    },
+    "poi": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "client_ref",
+        "canonical_name",
+        "evidence"
+      ],
+      "properties": {
+        "client_ref": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,79}$"
+        },
+        "address": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 500,
+          "pattern": "\\S"
+        },
+        "city": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 120,
+          "pattern": "\\S"
+        },
+        "state": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80,
+          "pattern": "\\S"
+        },
+        "lat": {
+          "type": "number",
+          "minimum": -90,
+          "maximum": 90
+        },
+        "lng": {
+          "type": "number",
+          "minimum": -180,
+          "maximum": 180
+        },
+        "origin_ref": {
+          "$ref": "#/$defs/origin_ref"
+        },
+        "evidence": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 10,
+          "items": {
+            "$ref": "#/$defs/evidence"
+          }
+        },
+        "canonical_name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 240,
+          "pattern": "\\S"
+        },
+        "poi_type": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9_-]{1,99}$"
+        }
+      }
+    }
+  }
+}

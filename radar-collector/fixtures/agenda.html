@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="pt-BR">
+<meta charset="utf-8">
+<title>Agenda fictícia para testar o Radar</title>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "MusicEvent",
+      "identifier": "show-homologacao-01",
+      "url": "https://example.org/agenda/show-homologacao-01",
+      "name": "Show de homologação (fictício)",
+      "startDate": "2030-11-16T20:00:00-03:00",
+      "endDate": "2030-11-16T22:00:00-03:00",
+      "eventStatus": "https://schema.org/EventScheduled",
+      "location": {
+        "@type": "Place",
+        "name": "Arena de homologação",
+        "address": {
+          "streetAddress": "Endereço fictício",
+          "addressLocality": "São Paulo",
+          "addressRegion": "SP",
+          "addressCountry": "BR"
+        },
+        "geo": {"latitude": -23.5505, "longitude": -46.6333}
+      }
+    },
+    {
+      "@type": "SportsEvent",
+      "identifier": "jogo-homologacao-01",
+      "url": "https://example.org/agenda/jogo-homologacao-01",
+      "name": "Jogo de homologação (fictício)",
+      "startDate": "2030-11-17T18:00:00-03:00",
+      "eventStatus": "https://schema.org/EventScheduled",
+      "location": {
+        "@type": "Place",
+        "name": "Estádio de homologação",
+        "geo": {"latitude": -23.5588, "longitude": -46.6602}
+      }
+    }
+  ]
+}
+</script>
+</html>

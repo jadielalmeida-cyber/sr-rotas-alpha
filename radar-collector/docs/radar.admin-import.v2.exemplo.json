@@ -1,0 +1,157 @@
+{
+  "schema_version": "radar.admin-import.v2",
+  "batch_id": "d13d6503-12e8-45fd-9cee-a0f3b87a678c",
+  "events": [
+    {
+      "client_ref": "evento-01",
+      "name": "Show de Homologação",
+      "event_type": "music",
+      "venue_name": "Arena Exemplo",
+      "address": "Rua Fictícia, 100",
+      "city": "São Paulo",
+      "state": "SP",
+      "lat": -23.5505,
+      "lng": -46.6333,
+      "starts_at": "2030-11-16T20:00:00-03:00",
+      "expected_end_at": "2030-11-16T22:00:00-03:00",
+      "origin_ref": {
+        "source": "agenda-exemplo",
+        "external_id": "ocorrencia-001"
+      },
+      "evidence": [
+        {
+          "kind": "web",
+          "url": "https://example.org/agenda/ocorrencia-001"
+        }
+      ],
+      "cover_image": {
+        "image_url": "https://example.org/media/show-homologacao.jpg",
+        "source_page_url": "https://example.org/agenda/ocorrencia-001",
+        "credit": "Organização Exemplo"
+      }
+    }
+  ],
+  "pois": [
+    {
+      "client_ref": "local-01",
+      "canonical_name": "Arena Exemplo",
+      "poi_type": "arena",
+      "address": "Rua Fictícia, 100",
+      "city": "São Paulo",
+      "state": "SP",
+      "lat": -23.5505,
+      "lng": -46.6333,
+      "evidence": [
+        {
+          "kind": "video",
+          "url": "https://example.org/videos/roteiro-ficticio",
+          "timestamp_sec": 75,
+          "observed_at": "2026-11-13T14:00:00-03:00"
+        }
+      ]
+    },
+    {
+      "client_ref": "local-02",
+      "canonical_name": "Teatro Exemplo",
+      "poi_type": "theatre",
+      "address": "Rua Fictícia, 200",
+      "city": "São Paulo",
+      "state": "SP",
+      "lat": -23.557,
+      "lng": -46.64,
+      "evidence": [
+        {
+          "kind": "video",
+          "url": "https://example.org/videos/roteiro-ficticio",
+          "timestamp_sec": 145,
+          "observed_at": "2026-11-13T14:00:00-03:00"
+        }
+      ]
+    },
+    {
+      "client_ref": "local-03",
+      "canonical_name": "Arena Exemplo",
+      "poi_type": "arena",
+      "address": "Rua Fictícia, 100",
+      "city": "São Paulo",
+      "state": "SP",
+      "lat": -23.5505,
+      "lng": -46.6333,
+      "evidence": [
+        {
+          "kind": "web",
+          "url": "https://example.org/guias/arena-exemplo"
+        }
+      ]
+    },
+    {
+      "client_ref": "local-04",
+      "canonical_name": "Café Exemplo",
+      "poi_type": "restaurant",
+      "city": "São Paulo",
+      "state": "SP",
+      "evidence": [
+        {
+          "kind": "video",
+          "url": "https://example.org/videos/roteiro-ficticio",
+          "timestamp_sec": 255,
+          "observed_at": "2026-11-13T14:00:00-03:00"
+        }
+      ]
+    },
+    {
+      "client_ref": "local-05",
+      "canonical_name": "Hotel Exemplo",
+      "poi_type": "hotel",
+      "address": "Rua Fictícia, 300",
+      "city": "São Paulo",
+      "state": "SP",
+      "lat": -23.559,
+      "lng": -46.642,
+      "evidence": [
+        {
+          "kind": "video",
+          "url": "https://example.org/videos/roteiro-ficticio",
+          "timestamp_sec": 145,
+          "observed_at": "2026-11-13T14:00:00-03:00"
+        }
+      ]
+    },
+    {
+      "client_ref": "local-06",
+      "canonical_name": "Rodoviária Exemplo",
+      "poi_type": "bus_terminal",
+      "address": "Rua Fictícia, 400",
+      "city": "São Paulo",
+      "state": "SP",
+      "lat": -23.562,
+      "lng": -46.647,
+      "evidence": [
+        {
+          "kind": "video",
+          "url": "https://example.org/videos/roteiro-ficticio",
+          "timestamp_sec": 145,
+          "observed_at": "2026-11-13T14:00:00-03:00"
+        }
+      ]
+    },
+    {
+      "client_ref": "local-07",
+      "canonical_name": "Centro Empresarial Exemplo",
+      "poi_type": "business_center",
+      "address": "Rua Fictícia, 500",
+      "city": "São Paulo",
+      "state": "SP",
+      "lat": -23.566,
+      "lng": -46.654,
+      "evidence": [
+        {
+          "kind": "video",
+          "url": "https://example.org/videos/roteiro-ficticio",
+          "timestamp_sec": 145,
+          "observed_at": "2026-11-13T14:00:00-03:00"
+        }
+      ]
+    }
+  ]
+}

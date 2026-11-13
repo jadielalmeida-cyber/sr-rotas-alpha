@@ -1,19 +1,16 @@
-# 🎈 Blank app template
+# Sr. Rotas | Coletor do Radar
 
-A simple Streamlit app template for you to modify!
+Coletor independente para normalizar eventos e locais e gerar lotes para a API do Radar. O código, o contrato de integração, os esquemas JSON e os dados fictícios de teste estão em [radar-collector/](radar-collector/).
 
-[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://blank-app-template.streamlit.app/)
+## Teste local
 
-### How to run it on your own machine
+Com Python 3.10 ou mais recente, execute na raiz do repositório.
 
-1. Install the requirements
+```sh
+cd radar-collector
+python3 -m unittest -v
+```
 
-   ```
-   $ pip install -r requirements.txt
-   ```
+Os testes usam uma API simulada. Para revisar a integração do Admin, consulte o [contrato v1.3](radar-collector/docs/CONTRATO_RADAR_v1.3.md) e o [JSON de exemplo](radar-collector/docs/radar.admin-import.v2.exemplo.json). O [guia do coletor](radar-collector/README.md) explica como gerar os lotes localmente.
 
-2. Run the app
-
-   ```
-   $ streamlit run streamlit_app.py
-   ```
+O código da tentativa anterior de aplicativo Streamlit permanece na raiz e no histórico do repositório.
